@@ -42,18 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String? _response;
   @override
   void initState() {
-    // may or may not need this
-    // FirebaseAuth.instance.getRedirectResult().then((result) {
-    //   if (result.user != null) {
-    //     print('User is signed in!');
-    //     result.user!.getIdToken().then((token) {
-    //       setState(() {
-    //         _accessToken = token;
-    //         _email = result.user!.email;
-    //       });
-    //     });
-    //   }
-    // });
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
         print('User is currently signed out!');
@@ -112,8 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: const Text('Sign in with Google'),
               ),
-              if (_accessToken != null)
-                Text('Email: $_email'),
+              if (_accessToken != null) Text('Email: $_email'),
               ElevatedButton(
                   onPressed: callBackend, child: const Text('Call Backend')),
               if (_response != null) Text('Response: $_response'),
